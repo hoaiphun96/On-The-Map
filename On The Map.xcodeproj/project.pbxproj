@@ -8,20 +8,40 @@
 
 /* Begin PBXBuildFile section */
 		EA12AD9F1FD7A31500C2FC39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12AD9E1FD7A31500C2FC39 /* AppDelegate.swift */; };
-		EA12ADA11FD7A31500C2FC39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADA01FD7A31500C2FC39 /* ViewController.swift */; };
+		EA12ADA11FD7A31500C2FC39 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADA01FD7A31500C2FC39 /* LoginViewController.swift */; };
 		EA12ADA41FD7A31500C2FC39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA12ADA21FD7A31500C2FC39 /* Main.storyboard */; };
 		EA12ADA61FD7A31500C2FC39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA12ADA51FD7A31500C2FC39 /* Assets.xcassets */; };
 		EA12ADA91FD7A31500C2FC39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA12ADA71FD7A31500C2FC39 /* LaunchScreen.storyboard */; };
+		EA12ADB31FD7B4C700C2FC39 /* OTMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADB21FD7B4C700C2FC39 /* OTMClient.swift */; };
+		EA12ADB61FD7B85700C2FC39 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADB51FD7B85700C2FC39 /* GCDBlackBox.swift */; };
+		EA12ADB81FD7BD0200C2FC39 /* OnTheMapListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADB71FD7BD0200C2FC39 /* OnTheMapListViewController.swift */; };
+		EA12ADBA1FD85C0800C2FC39 /* OnTheMapMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADB91FD85C0800C2FC39 /* OnTheMapMapViewController.swift */; };
+		EA12ADBC1FD8647200C2FC39 /* NameViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADBB1FD8647200C2FC39 /* NameViewCell.swift */; };
+		EA12ADBE1FD89CCA00C2FC39 /* NewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADBD1FD89CCA00C2FC39 /* NewPinViewController.swift */; };
+		EA2D1E2E1FD8F6C60025CE83 /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */; };
+		EA2D1E301FD9B2210025CE83 /* SubmitPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */; };
+		EA7DAECD1FD8EE160061565B /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7DAECC1FD8EE160061565B /* StudentLocation.swift */; };
+		EA89FFA21FDF6E4E00BCBE40 /* ToQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA89FFA11FDF6E4E00BCBE40 /* ToQuery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EA12AD9B1FD7A31500C2FC39 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA12AD9E1FD7A31500C2FC39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EA12ADA01FD7A31500C2FC39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EA12ADA01FD7A31500C2FC39 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EA12ADA31FD7A31500C2FC39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EA12ADA51FD7A31500C2FC39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA12ADA81FD7A31500C2FC39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA12ADAA1FD7A31500C2FC39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA12ADB21FD7B4C700C2FC39 /* OTMClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMClient.swift; sourceTree = "<group>"; };
+		EA12ADB51FD7B85700C2FC39 /* GCDBlackBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		EA12ADB71FD7BD0200C2FC39 /* OnTheMapListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapListViewController.swift; sourceTree = "<group>"; };
+		EA12ADB91FD85C0800C2FC39 /* OnTheMapMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapMapViewController.swift; sourceTree = "<group>"; };
+		EA12ADBB1FD8647200C2FC39 /* NameViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewCell.swift; sourceTree = "<group>"; };
+		EA12ADBD1FD89CCA00C2FC39 /* NewPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPinViewController.swift; sourceTree = "<group>"; };
+		EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
+		EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitPinViewController.swift; sourceTree = "<group>"; };
+		EA7DAECC1FD8EE160061565B /* StudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		EA89FFA11FDF6E4E00BCBE40 /* ToQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToQuery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +75,31 @@
 			isa = PBXGroup;
 			children = (
 				EA12AD9E1FD7A31500C2FC39 /* AppDelegate.swift */,
-				EA12ADA01FD7A31500C2FC39 /* ViewController.swift */,
+				EA12ADB51FD7B85700C2FC39 /* GCDBlackBox.swift */,
+				EA12ADB41FD7B4D300C2FC39 /* OTM */,
+				EA12ADA01FD7A31500C2FC39 /* LoginViewController.swift */,
+				EA12ADB71FD7BD0200C2FC39 /* OnTheMapListViewController.swift */,
+				EA12ADB91FD85C0800C2FC39 /* OnTheMapMapViewController.swift */,
+				EA12ADBD1FD89CCA00C2FC39 /* NewPinViewController.swift */,
+				EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */,
+				EA12ADBB1FD8647200C2FC39 /* NameViewCell.swift */,
 				EA12ADA21FD7A31500C2FC39 /* Main.storyboard */,
 				EA12ADA51FD7A31500C2FC39 /* Assets.xcassets */,
 				EA12ADA71FD7A31500C2FC39 /* LaunchScreen.storyboard */,
 				EA12ADAA1FD7A31500C2FC39 /* Info.plist */,
 			);
 			path = "On The Map";
+			sourceTree = "<group>";
+		};
+		EA12ADB41FD7B4D300C2FC39 /* OTM */ = {
+			isa = PBXGroup;
+			children = (
+				EA12ADB21FD7B4C700C2FC39 /* OTMClient.swift */,
+				EA7DAECC1FD8EE160061565B /* StudentLocation.swift */,
+				EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */,
+				EA89FFA11FDF6E4E00BCBE40 /* ToQuery.swift */,
+			);
+			path = OTM;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +174,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA12ADA11FD7A31500C2FC39 /* ViewController.swift in Sources */,
+				EA12ADB61FD7B85700C2FC39 /* GCDBlackBox.swift in Sources */,
+				EA89FFA21FDF6E4E00BCBE40 /* ToQuery.swift in Sources */,
+				EA12ADBC1FD8647200C2FC39 /* NameViewCell.swift in Sources */,
+				EA12ADA11FD7A31500C2FC39 /* LoginViewController.swift in Sources */,
+				EA7DAECD1FD8EE160061565B /* StudentLocation.swift in Sources */,
+				EA12ADB31FD7B4C700C2FC39 /* OTMClient.swift in Sources */,
+				EA12ADBA1FD85C0800C2FC39 /* OnTheMapMapViewController.swift in Sources */,
+				EA12ADBE1FD89CCA00C2FC39 /* NewPinViewController.swift in Sources */,
 				EA12AD9F1FD7A31500C2FC39 /* AppDelegate.swift in Sources */,
+				EA2D1E301FD9B2210025CE83 /* SubmitPinViewController.swift in Sources */,
+				EA2D1E2E1FD8F6C60025CE83 /* OTMConstants.swift in Sources */,
+				EA12ADB81FD7BD0200C2FC39 /* OnTheMapListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +323,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A8UXD77547;
 				INFOPLIST_FILE = "On The Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Udacity.JamieNguyen.On-The-Map";
@@ -289,6 +338,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A8UXD77547;
 				INFOPLIST_FILE = "On The Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Udacity.JamieNguyen.On-The-Map";
