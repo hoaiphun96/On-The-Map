@@ -20,8 +20,7 @@
 		EA12ADBE1FD89CCA00C2FC39 /* NewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADBD1FD89CCA00C2FC39 /* NewPinViewController.swift */; };
 		EA2D1E2E1FD8F6C60025CE83 /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */; };
 		EA2D1E301FD9B2210025CE83 /* SubmitPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */; };
-		EA7DAECD1FD8EE160061565B /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7DAECC1FD8EE160061565B /* StudentLocation.swift */; };
-		EA89FFA21FDF6E4E00BCBE40 /* ToQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA89FFA11FDF6E4E00BCBE40 /* ToQuery.swift */; };
+		EA7DAECD1FD8EE160061565B /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7DAECC1FD8EE160061565B /* StudentInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +39,7 @@
 		EA12ADBD1FD89CCA00C2FC39 /* NewPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPinViewController.swift; sourceTree = "<group>"; };
 		EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
 		EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitPinViewController.swift; sourceTree = "<group>"; };
-		EA7DAECC1FD8EE160061565B /* StudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
-		EA89FFA11FDF6E4E00BCBE40 /* ToQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToQuery.swift; sourceTree = "<group>"; };
+		EA7DAECC1FD8EE160061565B /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,13 +74,13 @@
 			children = (
 				EA12AD9E1FD7A31500C2FC39 /* AppDelegate.swift */,
 				EA12ADB51FD7B85700C2FC39 /* GCDBlackBox.swift */,
-				EA12ADB41FD7B4D300C2FC39 /* OTM */,
+				EA12ADB41FD7B4D300C2FC39 /* OTM Model */,
+				EA12ADBB1FD8647200C2FC39 /* NameViewCell.swift */,
 				EA12ADA01FD7A31500C2FC39 /* LoginViewController.swift */,
 				EA12ADB71FD7BD0200C2FC39 /* OnTheMapListViewController.swift */,
 				EA12ADB91FD85C0800C2FC39 /* OnTheMapMapViewController.swift */,
 				EA12ADBD1FD89CCA00C2FC39 /* NewPinViewController.swift */,
 				EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */,
-				EA12ADBB1FD8647200C2FC39 /* NameViewCell.swift */,
 				EA12ADA21FD7A31500C2FC39 /* Main.storyboard */,
 				EA12ADA51FD7A31500C2FC39 /* Assets.xcassets */,
 				EA12ADA71FD7A31500C2FC39 /* LaunchScreen.storyboard */,
@@ -91,15 +89,14 @@
 			path = "On The Map";
 			sourceTree = "<group>";
 		};
-		EA12ADB41FD7B4D300C2FC39 /* OTM */ = {
+		EA12ADB41FD7B4D300C2FC39 /* OTM Model */ = {
 			isa = PBXGroup;
 			children = (
 				EA12ADB21FD7B4C700C2FC39 /* OTMClient.swift */,
-				EA7DAECC1FD8EE160061565B /* StudentLocation.swift */,
+				EA7DAECC1FD8EE160061565B /* StudentInformation.swift */,
 				EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */,
-				EA89FFA11FDF6E4E00BCBE40 /* ToQuery.swift */,
 			);
-			path = OTM;
+			path = "OTM Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,10 +172,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA12ADB61FD7B85700C2FC39 /* GCDBlackBox.swift in Sources */,
-				EA89FFA21FDF6E4E00BCBE40 /* ToQuery.swift in Sources */,
 				EA12ADBC1FD8647200C2FC39 /* NameViewCell.swift in Sources */,
 				EA12ADA11FD7A31500C2FC39 /* LoginViewController.swift in Sources */,
-				EA7DAECD1FD8EE160061565B /* StudentLocation.swift in Sources */,
+				EA7DAECD1FD8EE160061565B /* StudentInformation.swift in Sources */,
 				EA12ADB31FD7B4C700C2FC39 /* OTMClient.swift in Sources */,
 				EA12ADBA1FD85C0800C2FC39 /* OnTheMapMapViewController.swift in Sources */,
 				EA12ADBE1FD89CCA00C2FC39 /* NewPinViewController.swift in Sources */,
