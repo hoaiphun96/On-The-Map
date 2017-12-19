@@ -20,12 +20,12 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
         reloadMap()
         }
     
-    
     @IBAction func refreshClicked(_ sender: Any) {
         reloadMap()
     }
     
     func reloadMap() {
+        LoaderController.sharedInstance.showLoader()
         let _ = OTMClient.sharedInstance().getStudentLocations { (locations, error) in
             if let locations = locations {
                 OTMClient.sharedInstance().studentInformationModel = locations
@@ -48,20 +48,26 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
                         performUIUpdatesOnMain {
                             self.mapView.addAnnotations(annotations)
                             self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+                            LoaderController.sharedInstance.removeLoader()
                         }
                         
                     }
                     else {
+                        LoaderController.sharedInstance.removeLoader()
                         print("Can't find longitude and latitude in \(dictionary)'s data")
                     }
                 }
                 
             } else {
+                LoaderController.sharedInstance.removeLoader()
                 print("No locations found")
             }
         }
     }
     
+    @IBAction func logOutClicked(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
     
     @IBAction func pinLocationClicked(_ sender: Any) {
         // TODO: check if a pin already existed
@@ -70,7 +76,7 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
                 // case already has a location
                 if errorString == nil {
                     // TODO: SHOW ALERT AND ASK IF YOU WANT TO UPDATE (OVERWRITE, CANCEL), IF OVERWRITE CALL POST NEW PIN FUNCTION ELSE DISMISS ALERT
-                    let alert = UIAlertController(title: nil, message: "You Have Already Posted A Student Location. Would You Like To OverWrite Your Current Position?", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "", message: "You Have Already Posted A Student Location. Would You Like To OverWrite Your Current Position?", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("Overwrite", comment: "Default action"), style: .`default`, handler: { _ in
                         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "NewPinViewController")
                         self.navigationController?.pushViewController(viewController, animated: true)
@@ -129,7 +135,6 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
-                print("THIS URL", toOpen)
                 app.open(URL(string: toOpen)!, options: [:], completionHandler: { (success) in
                     if success == false {
                         print("FAIL TO OPEN URL")

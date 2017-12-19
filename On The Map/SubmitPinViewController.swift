@@ -10,9 +10,9 @@ import UIKit
 import MapKit
 class SubmitPinViewController: UIViewController, MKMapViewDelegate  {
     
-    @IBOutlet weak var mediaURL: UITextField!
     @IBOutlet weak var map: MKMapView!
     var newlocation: String!
+    var newmediaurl: String!
     var newLat: CLLocationDegrees?
     var newLong: CLLocationDegrees?
     
@@ -21,7 +21,7 @@ class SubmitPinViewController: UIViewController, MKMapViewDelegate  {
         // GET THE LAT AND LONG BASED ON
         
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(newlocation!, completionHandler: {(placemarks, error) -> Void in
+        geocoder.geocodeAddressString(newlocation, completionHandler: {(placemarks, error) -> Void in
             if let placemark = placemarks?[0] {
                 self.newLat = placemark.location!.coordinate.latitude
                 self.newLong = placemark.location!.coordinate.longitude
@@ -43,9 +43,17 @@ class SubmitPinViewController: UIViewController, MKMapViewDelegate  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
-      
-        }
+        self.navigationController?.navigationBar.isHidden = false
+        let button = UIBarButtonItem(title: "Add Location", style: UIBarButtonItemStyle.plain, target: self, action: #selector(UIWebView.goBack))
+        self.navigationItem.backBarButtonItem = button
+        
+        self.navigationController?.navigationBar.topItem?.title = "Add Location" 
+    
+    }
+    
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
+    }
    
    
     @IBAction func cancelClicked(_ sender: Any) {
@@ -53,12 +61,12 @@ class SubmitPinViewController: UIViewController, MKMapViewDelegate  {
         self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
     }
     
-    @IBAction func submitClicked(_ sender: Any) {
-        print("NEW LOCATION WHEN CLICKING SUBMIT", self.newlocation)
+    @IBAction func finishClicked(_ sender: Any) {
+  
         let parameters = ["latitude": self.newLat!,
                           "longitude": self.newLong!,
-                          "mapString": self.newlocation!,
-                          "mediaURL": self.mediaURL!.text!] as [String : AnyObject]
+                          "mapString": self.newlocation,
+                          "mediaURL": self.newmediaurl] as [String : AnyObject]
         //if pin existed, call put, update updatedAt
         if OTMClient.sharedInstance().myAccount.objectId != nil {
             let _ = OTMClient.sharedInstance().puttingStudentLocation(parameters, completionHandlerForPutStudentLocation: { (success, errorString) in
@@ -66,7 +74,7 @@ class SubmitPinViewController: UIViewController, MKMapViewDelegate  {
                     print(errorString!)
                     return
                 }
-                print("AFTER UPDATING WITH A NEW PIN",OTMClient.sharedInstance().myAccount)
+             
               
             })
         }
@@ -77,12 +85,11 @@ class SubmitPinViewController: UIViewController, MKMapViewDelegate  {
                 print(errorString!)
                 return
             }
-            print("AFTER POSTING A NEW PIN",OTMClient.sharedInstance().myAccount.createdAt!,OTMClient.sharedInstance().myAccount.objectId!)
             })
         }
         OTMClient.sharedInstance().myAccount.mapString = newlocation
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        self.navigationController!.popToViewController(viewControllers[1], animated: true)
     }
     
     

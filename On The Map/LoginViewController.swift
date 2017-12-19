@@ -12,38 +12,55 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
+    
     var session: URLSession!
    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.passwordTextField.text = nil
+        self.emailTextField.text = nil
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    
-    
     @IBAction func login(_ sender: Any) {
-        let parameters = ["username": emailTextField.text,
-                          "password": passwordTextField.text] as [String: AnyObject]
-        OTMClient.sharedInstance().username = emailTextField.text
-        OTMClient.sharedInstance().password = passwordTextField.text
-        let _ = OTMClient.sharedInstance().authenticateWithViewController(self,parameters) { (success, errorString) in
-            performUIUpdatesOnMain {
-                if success {
-                    self.completeLogin()
-                } else {
-                    OTMClient.sharedInstance().showAlertMessage(title: "Login Failed", message: errorString!, viewController: self, shouldPop: false)
-                    self.passwordTextField.text = nil
-                    self.emailTextField.text = nil
+        LoaderController.sharedInstance.showLoader()
+        if OTMClient.sharedInstance().isInternetAvailable() == true {
+            let parameters = ["username": emailTextField.text,
+                              "password": passwordTextField.text] as [String: AnyObject]
+            OTMClient.sharedInstance().username = emailTextField.text
+            OTMClient.sharedInstance().password = passwordTextField.text
+            let _ = OTMClient.sharedInstance().authenticateWithViewController(self,parameters) { (success, errorString) in
+                performUIUpdatesOnMain {
+                    if success {
+                        self.completeLogin()
+                    } else {
+                        LoaderController.sharedInstance.removeLoader()
+                        OTMClient.sharedInstance().showAlertMessage(title: "", message: errorString!, viewController: self, shouldPop: false)
+                        self.passwordTextField.text = nil
+                        self.emailTextField.text = nil
+                    }
                 }
             }
         }
         
+        else {
+            LoaderController.sharedInstance.removeLoader()
+            OTMClient.sharedInstance().showAlertMessage(title: "", message: "The internet connection appears to be offline", viewController: self, shouldPop: false)
+        }
     }
+    // MARK: Sign up
+    
+    @IBAction func signUp(_ sender: Any) {
+        let app = UIApplication.shared
+        let toOpen = "https://www.udacity.com/account/auth#!/signup"
+        app.open(URL(string: toOpen)!, options: [:], completionHandler: { (success) in
+                if success == false {
+                    print("FAIL TO OPEN URL")
+                    return
+                }})
+        }
+    
     
     // MARK: Login
     
@@ -51,33 +68,23 @@ class LoginViewController: UIViewController {
         let _ = OTMClient.sharedInstance().getPublicUserData { (success, errorString) in
             if success {
                 performUIUpdatesOnMain {
+                    LoaderController.sharedInstance.removeLoader()
                     let viewController = self.storyboard!.instantiateViewController(withIdentifier: "OnTheMapViewController")
                     self.navigationController?.pushViewController(viewController, animated: true)
                 }
             }
             else {
-                OTMClient.sharedInstance().showAlertMessage(title: "Error", message: "Cannot retrieve your account information", viewController: self, shouldPop: false)
+                LoaderController.sharedInstance.removeLoader()
+                OTMClient.sharedInstance().showAlertMessage(title: "", message: "Cannot retrieve your account information", viewController: self, shouldPop: false)
             }
         }
         
     }
-}
-
-
-private extension LoginViewController {
-    
-    func setUIEnabled(_ enabled: Bool) {
-        loginButton.isEnabled = enabled
-        
-        // adjust login button alpha
-        if enabled {
-            loginButton.alpha = 1.0
-        } else {
-            loginButton.alpha = 0.5
-        }
-    }
     
     
 }
+
+
+
 
 

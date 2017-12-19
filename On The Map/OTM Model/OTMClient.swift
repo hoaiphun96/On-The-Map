@@ -17,23 +17,25 @@ class OTMClient : NSObject {
     var sessionID : String?
     var username: String?
     var password: String?
+    //var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     //Student Locations and this Student Location Model
     var studentInformationModel = [StudentInformation]()
     var myAccount = StudentInformation()
 
     func authenticateWithViewController(_ viewController: UIViewController,_ parameters: [String:AnyObject], completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void) -> URLSessionDataTask {
+        print("starting authenticating")
         var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"udacity\": {\"username\": \"\(username!)\", \"password\": \"\(password!)\"}}".data(using: .utf8)
-    
+        
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
+            
             if error != nil {
-                print(error!)
-                completionHandlerForAuth(false, "Login Failed")
+                completionHandlerForAuth(false, error?.localizedDescription)
                 return
             }
 
@@ -102,7 +104,7 @@ class OTMClient : NSObject {
     
     // MARK: GET USER INFO
     func getStudentLocations(completionHandlerForGetStudentLocations: @escaping (_ locations: [StudentInformation]?, _ errorString: String?) -> Void) -> URLSessionDataTask {
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?order=-updatedAt")!)
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?order=-updatedAt&order=-updatedAt")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = URLSession.shared
@@ -133,7 +135,7 @@ class OTMClient : NSObject {
         return task
     }
     
-    // MARK: Get public user data
+    // MARK: GET PUBLIC USER DATA
     func getPublicUserData (completionHandlerForGetPublicUserData: @escaping (_ success: Bool, _ errorString: String?) -> Void) -> URLSessionDataTask {
         let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/\(self.myAccount.uniqueKey!)")!)
         let session = URLSession.shared
@@ -200,7 +202,7 @@ class OTMClient : NSObject {
         return task
     }
     
-    //
+    // MARK: GET A STUDENT LOCATION
     func getAStudentLocation(completionHandlerForGetAStudentLocation: @escaping (_ success: Bool, _ errorString: String?) -> Void) -> URLSessionDataTask {
         let txtAppend = String(self.myAccount.uniqueKey!).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let urlString = "https://parse.udacity.com/parse/classes/StudentLocation?where={\"uniqueKey\":\"\(txtAppend!)\"}"
@@ -238,20 +240,47 @@ class OTMClient : NSObject {
         task.resume()
         return task
     }
+    // MARK: DELETE A SESSION
+    func deleteSession(_ completionHandlerForDeleteSession: @escaping (_ success: Bool, _ errorString: String?) -> Void) -> URLSessionDataTask {
+        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                completionHandlerForDeleteSession(false, "Log out failed")
+                return
+            }
+            let range = Range(5..<data!.count)
+            let newData = data?.subdata(in: range) /* subset response data! */
+            print(String(data: newData!, encoding: .utf8)!)
+        }
+        task.resume()
+        return task
+    }
     
+    // MARK: SHOW ALERT MESSAGE
     func showAlertMessage(title: String, message: String, viewController: UIViewController, shouldPop: Bool) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: "Default action"), style: .default, handler: { _ in
             if shouldPop {
                 viewController.navigationController?.popViewController(animated: true)
             }
         }))
         viewController.present(alert, animated: true, completion: nil)
     }
+    
+   
 
     
     // MARK: Shared Instance
-    
     class func sharedInstance() -> OTMClient {
         struct Singleton {
             static var sharedInstance = OTMClient()

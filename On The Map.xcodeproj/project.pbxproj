@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA095E3E1FE493BF00FD2A5D /* LoaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095E3D1FE493BF00FD2A5D /* LoaderController.swift */; };
 		EA12AD9F1FD7A31500C2FC39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12AD9E1FD7A31500C2FC39 /* AppDelegate.swift */; };
 		EA12ADA11FD7A31500C2FC39 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADA01FD7A31500C2FC39 /* LoginViewController.swift */; };
 		EA12ADA41FD7A31500C2FC39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA12ADA21FD7A31500C2FC39 /* Main.storyboard */; };
@@ -21,9 +22,11 @@
 		EA2D1E2E1FD8F6C60025CE83 /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */; };
 		EA2D1E301FD9B2210025CE83 /* SubmitPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */; };
 		EA7DAECD1FD8EE160061565B /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7DAECC1FD8EE160061565B /* StudentInformation.swift */; };
+		EAF8687C1FE1987700E881D2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF8687B1FE1987700E881D2 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA095E3D1FE493BF00FD2A5D /* LoaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderController.swift; sourceTree = "<group>"; };
 		EA12AD9B1FD7A31500C2FC39 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA12AD9E1FD7A31500C2FC39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA12ADA01FD7A31500C2FC39 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +43,7 @@
 		EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
 		EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitPinViewController.swift; sourceTree = "<group>"; };
 		EA7DAECC1FD8EE160061565B /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		EAF8687B1FE1987700E881D2 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +79,6 @@
 				EA12AD9E1FD7A31500C2FC39 /* AppDelegate.swift */,
 				EA12ADB51FD7B85700C2FC39 /* GCDBlackBox.swift */,
 				EA12ADB41FD7B4D300C2FC39 /* OTM Model */,
-				EA12ADBB1FD8647200C2FC39 /* NameViewCell.swift */,
 				EA12ADA01FD7A31500C2FC39 /* LoginViewController.swift */,
 				EA12ADB71FD7BD0200C2FC39 /* OnTheMapListViewController.swift */,
 				EA12ADB91FD85C0800C2FC39 /* OnTheMapMapViewController.swift */,
@@ -85,6 +88,8 @@
 				EA12ADA51FD7A31500C2FC39 /* Assets.xcassets */,
 				EA12ADA71FD7A31500C2FC39 /* LaunchScreen.storyboard */,
 				EA12ADAA1FD7A31500C2FC39 /* Info.plist */,
+				EAF8687B1FE1987700E881D2 /* Reachability.swift */,
+				EA12ADBB1FD8647200C2FC39 /* NameViewCell.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -95,6 +100,7 @@
 				EA12ADB21FD7B4C700C2FC39 /* OTMClient.swift */,
 				EA7DAECC1FD8EE160061565B /* StudentInformation.swift */,
 				EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */,
+				EA095E3D1FE493BF00FD2A5D /* LoaderController.swift */,
 			);
 			path = "OTM Model";
 			sourceTree = "<group>";
@@ -173,12 +179,14 @@
 			files = (
 				EA12ADB61FD7B85700C2FC39 /* GCDBlackBox.swift in Sources */,
 				EA12ADBC1FD8647200C2FC39 /* NameViewCell.swift in Sources */,
+				EAF8687C1FE1987700E881D2 /* Reachability.swift in Sources */,
 				EA12ADA11FD7A31500C2FC39 /* LoginViewController.swift in Sources */,
 				EA7DAECD1FD8EE160061565B /* StudentInformation.swift in Sources */,
 				EA12ADB31FD7B4C700C2FC39 /* OTMClient.swift in Sources */,
 				EA12ADBA1FD85C0800C2FC39 /* OnTheMapMapViewController.swift in Sources */,
 				EA12ADBE1FD89CCA00C2FC39 /* NewPinViewController.swift in Sources */,
 				EA12AD9F1FD7A31500C2FC39 /* AppDelegate.swift in Sources */,
+				EA095E3E1FE493BF00FD2A5D /* LoaderController.swift in Sources */,
 				EA2D1E301FD9B2210025CE83 /* SubmitPinViewController.swift in Sources */,
 				EA2D1E2E1FD8F6C60025CE83 /* OTMConstants.swift in Sources */,
 				EA12ADB81FD7BD0200C2FC39 /* OnTheMapListViewController.swift in Sources */,

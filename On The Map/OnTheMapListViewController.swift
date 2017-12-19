@@ -15,23 +15,32 @@ class OnTheMapListViewController: UIViewController , UITableViewDataSource{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.loadData()
+    }
+    
+    @IBAction func logOutClicked(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func loadData() {
+        LoaderController.sharedInstance.showLoader()
         self.navigationController?.navigationBar.isHidden = true
         let _ = OTMClient.sharedInstance().getStudentLocations { (locations, error) in
             if let locations = locations {
                 OTMClient.sharedInstance().studentInformationModel = locations
                 performUIUpdatesOnMain {
                     self.studentLocationsTableView.reloadData()
+                    LoaderController.sharedInstance.removeLoader()
                 }
             } else {
-                print(error ?? "empty error")
+                LoaderController.sharedInstance.removeLoader()
+                OTMClient.sharedInstance().showAlertMessage(title: "", message: "Failed to download student locations", viewController: self, shouldPop: false)
             }
         }
     }
     
     @IBAction func refreshClicked(_ sender: Any) {
-        self.studentLocationsTableView.reloadData()
-       
+        self.loadData()
     }
     
     @IBAction func pinLocationClicked(_ sender: Any) {
@@ -40,7 +49,7 @@ class OnTheMapListViewController: UIViewController , UITableViewDataSource{
             if success {
                 if errorString == nil {
                     // TODO: SHOW ALERT AND ASK IF YOU WANT TO UPDATE (OVERWRITE, CANCEL), IF OVERWRITE CALL POST NEW PIN FUNCTION ELSE DISMISS ALERT
-                    let alert = UIAlertController(title: nil, message: "You Have Already Posted A Student Location. Would You Like To OverWrite Your Current Position?", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "", message: "You Have Already Posted A Student Location. Would You Like To OverWrite Your Current Position?", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("Overwrite", comment: "Default action"), style: .`default`, handler: { _ in
                         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "NewPinViewController")
                         self.navigationController?.pushViewController(viewController, animated: true)
@@ -76,8 +85,8 @@ extension OnTheMapListViewController: UITableViewDelegate {
         /* Get cell type */
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for: indexPath) as! NameViewCell
         let studentInformation = OTMClient.sharedInstance().studentInformationModel[(indexPath as NSIndexPath).row]
-        /* Set cell defaults */
         
+        /* Set cell defaults */
         cell.nameLabel.text = (studentInformation.firstName ?? "No") + " " + (studentInformation.lastName ?? "Name")!
         return cell
     }
