@@ -47,7 +47,7 @@ class SubmitPinViewController: UIViewController, MKMapViewDelegate  {
         let button = UIBarButtonItem(title: "Add Location", style: UIBarButtonItemStyle.plain, target: self, action: #selector(UIWebView.goBack))
         self.navigationItem.backBarButtonItem = button
         
-        self.navigationController?.navigationBar.topItem?.title = "Add Location" 
+        self.navigationController?.navigationBar.topItem?.title = "Add Location"
     
     }
     

@@ -301,7 +301,7 @@
         <!--Submit Pin View Controller-->
         <scene sceneID="rxS-VJ-84T">
             <objects>
-                <viewController storyboardIdentifier="SubmitPinViewController" title="Submit Pin View Controller" id="aEu-BL-MhP" customClass="SubmitPinViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SubmitPinViewController" id="aEu-BL-MhP" customClass="SubmitPinViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Szi-ye-c9W">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
