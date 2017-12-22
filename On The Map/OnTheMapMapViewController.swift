@@ -12,8 +12,7 @@ import MapKit
 class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
@@ -25,7 +24,12 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func reloadMap() {
+        guard OTMClient.sharedInstance.isInternetAvailable() else {
+            OTMClient.sharedInstance.showAlertMessage(title: "", message: "There is no internet connection", viewController: self, shouldPop: false)
+            return
+        }
         LoaderController.sharedInstance.showLoader(mapView)
+        mapView.removeAnnotations(mapView.annotations)
         let _ = OTMClient.sharedInstance.getStudentLocations { (locations, error) in
             if let locations = locations {
                 Students.sharedInstance = locations
@@ -75,7 +79,7 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
             if success {
                 // case already has a location
                 if errorString == nil {
-                    let alert = UIAlertController(title: "", message: "You Have Already Posted A Student Location. Would You Like To OverWrite Your Current Position?", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "", message: "You have already posted a student location. Would you like to overWrite your current position?", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("Overwrite", comment: "Default action"), style: .`default`, handler: { _ in
                         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "NewPinViewController")
                         self.navigationController?.pushViewController(viewController, animated: true)

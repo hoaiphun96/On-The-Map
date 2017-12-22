@@ -209,8 +209,7 @@ class OTMClient : NSObject {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil {
-                completionHandlerForGetAStudentLocation(false, "getAStudentLocation failed")
-                print("getastudentlocation failed")
+                completionHandlerForGetAStudentLocation(false, "Getting student information failed")
                 return
             }
             let parsedResult: [String:AnyObject]

@@ -25,6 +25,10 @@ class OnTheMapListViewController: UIViewController , UITableViewDataSource{
     }
     
     func loadData() {
+        guard OTMClient.sharedInstance.isInternetAvailable() else {
+            OTMClient.sharedInstance.showAlertMessage(title: "", message: "There is no internet connection", viewController: self, shouldPop: false)
+            return
+        }
         LoaderController.sharedInstance.showLoader(tableView)
         self.navigationController?.navigationBar.isHidden = true
         let _ = OTMClient.sharedInstance.getStudentLocations { (locations, error) in

@@ -54,9 +54,9 @@ class SubmitPinViewController: UIViewController, MKMapViewDelegate  {
             }
             else {
                 LoaderController.sharedInstance.removeLoader()
-                OTMClient.sharedInstance.showAlertMessage(title: "Try again", message: "Location not found", viewController: self, shouldPop: true)
+                OTMClient.sharedInstance.showAlertMessage(title: "Try again", message: OTMClient.sharedInstance.isInternetAvailable() ? "There was an error finding your location" : "There is no internet connection" , viewController: self, shouldPop: true)
             }
-        })
+            })
     }
     
     func goBack() {

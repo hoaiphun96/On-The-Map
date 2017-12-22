@@ -61,7 +61,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }})
     }
     
-    
     // MARK: Login
     
     private func completeLogin() {
@@ -78,10 +77,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 OTMClient.sharedInstance.showAlertMessage(title: "", message: "Cannot retrieve your account information", viewController: self, shouldPop: false)
             }
         }
-        
     }
-    
-    
 }
 
 extension LoginViewController {

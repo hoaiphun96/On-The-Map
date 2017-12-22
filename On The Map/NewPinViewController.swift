@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewPinViewController: UIViewController {
+class NewPinViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var websiteTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -31,16 +31,16 @@ class NewPinViewController: UIViewController {
     
     @IBAction func findOnTheMapClicked(_ sender: Any) {
         //if location text field empty
-        guard locationTextField.text != nil else {
-            OTMClient.sharedInstance.showAlertMessage(title: "Location Not Found", message: "Must Enter a Location", viewController: self, shouldPop: false)
+        guard locationTextField.text != "" else {
+            OTMClient.sharedInstance.showAlertMessage(title: "", message: "Must Enter a Location", viewController: self, shouldPop: false)
             return
         }
-        guard websiteTextField.text != nil else {
-            OTMClient.sharedInstance.showAlertMessage(title: "Location Not Found", message: "Must Enter a Website", viewController: self, shouldPop: false)
+        guard websiteTextField.text != "" else {
+            OTMClient.sharedInstance.showAlertMessage(title: "", message: "Must Enter a Website", viewController: self, shouldPop: false)
             return
         }
         guard websiteTextField.text!.lowercased().hasPrefix("https://") || websiteTextField.text!.lowercased().hasPrefix("http://") else {
-            OTMClient.sharedInstance.showAlertMessage(title: "Location Not Found", message: "Invalid Link. Include HTTP(S)://", viewController: self, shouldPop: false)
+            OTMClient.sharedInstance.showAlertMessage(title: "", message: "Invalid Link. Include HTTP(S)://", viewController: self, shouldPop: false)
             return
         }
         let viewController = storyboard!.instantiateViewController(withIdentifier: "SubmitPinViewController") as! SubmitPinViewController
@@ -49,6 +49,12 @@ class NewPinViewController: UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    
-    
 }
+
+extension NewPinViewController {
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
+        }
+}
+
