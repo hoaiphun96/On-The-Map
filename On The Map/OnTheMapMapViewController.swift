@@ -10,28 +10,29 @@ import UIKit
 import MapKit
 
 class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
-
+    
     @IBOutlet weak var mapView: MKMapView!
     
- 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         reloadMap()
-        }
+    }
     
     @IBAction func refreshClicked(_ sender: Any) {
         reloadMap()
     }
     
     func reloadMap() {
-        LoaderController.sharedInstance.showLoader()
-        let _ = OTMClient.sharedInstance().getStudentLocations { (locations, error) in
+        LoaderController.sharedInstance.showLoader(mapView)
+        let _ = OTMClient.sharedInstance.getStudentLocations { (locations, error) in
             if let locations = locations {
-                OTMClient.sharedInstance().studentInformationModel = locations
+                Students.sharedInstance = locations
                 var annotations = [MKPointAnnotation]()
-                for dictionary in OTMClient.sharedInstance().studentInformationModel {
-                    if let latdouble = dictionary.latitude, let longdouble = dictionary.longitude{
+                for dictionary in Students.sharedInstance {
+                    
+                    if let latdouble = dictionary.latitude, let longdouble = dictionary.longitude {
                         let lat = CLLocationDegrees(latdouble)
                         let long = CLLocationDegrees(longdouble)
                         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -54,13 +55,13 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
                     }
                     else {
                         LoaderController.sharedInstance.removeLoader()
-                        print("Can't find longitude and latitude in \(dictionary)'s data")
+                        print("No location found for \(dictionary.firstName ?? "No") \(dictionary.lastName ?? "Name")")
                     }
                 }
                 
             } else {
                 LoaderController.sharedInstance.removeLoader()
-                print("No locations found")
+                OTMClient.sharedInstance.showAlertMessage(title: "", message: "No student found", viewController: self, shouldPop: false)
             }
         }
     }
@@ -70,12 +71,10 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func pinLocationClicked(_ sender: Any) {
-        // TODO: check if a pin already existed
-        let _ = OTMClient.sharedInstance().getAStudentLocation { (success, errorString) in
+        let _ = OTMClient.sharedInstance.getAStudentLocation { (success, errorString) in
             if success {
                 // case already has a location
                 if errorString == nil {
-                    // TODO: SHOW ALERT AND ASK IF YOU WANT TO UPDATE (OVERWRITE, CANCEL), IF OVERWRITE CALL POST NEW PIN FUNCTION ELSE DISMISS ALERT
                     let alert = UIAlertController(title: "", message: "You Have Already Posted A Student Location. Would You Like To OverWrite Your Current Position?", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("Overwrite", comment: "Default action"), style: .`default`, handler: { _ in
                         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "NewPinViewController")
@@ -98,11 +97,12 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
             }
             else {
                 // IF NOT SUCCESS
+                OTMClient.sharedInstance.showAlertMessage(title: "", message: errorString!, viewController: self, shouldPop: false)
                 print(errorString!)
                 return
             }
         }
-
+        
     }
     
     // MARK: - MKMapViewDelegate
@@ -127,7 +127,7 @@ class OnTheMapMapViewController: UIViewController, MKMapViewDelegate {
         
         return pinView
         
-    
+        
     }
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.

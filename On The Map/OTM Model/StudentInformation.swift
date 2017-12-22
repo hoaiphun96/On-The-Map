@@ -9,16 +9,16 @@
 struct StudentInformation {
     
     // MARK: Properties
-        var createdAt : String?
-        var firstName : String?
-        var lastName : String?
-        var latitude : Float?
-        var longitude : Float?
-        var mediaURL : String?
-        var objectId: String?
-        var uniqueKey: String?
-        var updatedAt: String?
-        var mapString: String?
+    var createdAt : String?
+    var firstName : String?
+    var lastName : String?
+    var latitude : Float?
+    var longitude : Float?
+    var mediaURL : String?
+    var objectId: String?
+    var uniqueKey: String?
+    var updatedAt: String?
+    var mapString: String?
     
     
     // MARK: Initializers
@@ -55,21 +55,12 @@ struct StudentInformation {
         
         // iterate through array of dictionaries, each Movie is a dictionary
         for result in results {
-            if StudentInformations.contains(StudentInformation(dictionary: result)) == false {
                 StudentInformations.append(StudentInformation(dictionary: result))
             }
-        }
+       // }
         return StudentInformations
     }
 }
 
-// MARK: - TMDBMovie: Equatable
 
-extension StudentInformation: Equatable {}
-
-func ==(lhs: StudentInformation, rhs: StudentInformation) -> Bool {
-    return lhs.uniqueKey == rhs.uniqueKey
-}
-
-    
 

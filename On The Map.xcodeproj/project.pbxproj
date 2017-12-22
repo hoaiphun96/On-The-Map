@@ -21,6 +21,7 @@
 		EA12ADBE1FD89CCA00C2FC39 /* NewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12ADBD1FD89CCA00C2FC39 /* NewPinViewController.swift */; };
 		EA2D1E2E1FD8F6C60025CE83 /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */; };
 		EA2D1E301FD9B2210025CE83 /* SubmitPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */; };
+		EA6EEF031FEC7783002158FA /* Students.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6EEF021FEC7783002158FA /* Students.swift */; };
 		EA7DAECD1FD8EE160061565B /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7DAECC1FD8EE160061565B /* StudentInformation.swift */; };
 		EAF8687C1FE1987700E881D2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF8687B1FE1987700E881D2 /* Reachability.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		EA12ADBD1FD89CCA00C2FC39 /* NewPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPinViewController.swift; sourceTree = "<group>"; };
 		EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
 		EA2D1E2F1FD9B2210025CE83 /* SubmitPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitPinViewController.swift; sourceTree = "<group>"; };
+		EA6EEF021FEC7783002158FA /* Students.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Students.swift; sourceTree = "<group>"; };
 		EA7DAECC1FD8EE160061565B /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		EAF8687B1FE1987700E881D2 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +103,7 @@
 				EA7DAECC1FD8EE160061565B /* StudentInformation.swift */,
 				EA2D1E2D1FD8F6C60025CE83 /* OTMConstants.swift */,
 				EA095E3D1FE493BF00FD2A5D /* LoaderController.swift */,
+				EA6EEF021FEC7783002158FA /* Students.swift */,
 			);
 			path = "OTM Model";
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				EA7DAECD1FD8EE160061565B /* StudentInformation.swift in Sources */,
 				EA12ADB31FD7B4C700C2FC39 /* OTMClient.swift in Sources */,
 				EA12ADBA1FD85C0800C2FC39 /* OnTheMapMapViewController.swift in Sources */,
+				EA6EEF031FEC7783002158FA /* Students.swift in Sources */,
 				EA12ADBE1FD89CCA00C2FC39 /* NewPinViewController.swift in Sources */,
 				EA12AD9F1FD7A31500C2FC39 /* AppDelegate.swift in Sources */,
 				EA095E3E1FE493BF00FD2A5D /* LoaderController.swift in Sources */,

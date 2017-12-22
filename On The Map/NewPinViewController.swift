@@ -15,32 +15,32 @@ class NewPinViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
         locationTextField.text = nil
         websiteTextField.text = nil
     }
-
+    
     func goBack()
     {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func findOnTheMapClicked(_ sender: Any) {
         //if location text field empty
         guard locationTextField.text != nil else {
-            OTMClient.sharedInstance().showAlertMessage(title: "Location Not Found", message: "Must Enter a Location", viewController: self, shouldPop: false)
+            OTMClient.sharedInstance.showAlertMessage(title: "Location Not Found", message: "Must Enter a Location", viewController: self, shouldPop: false)
             return
         }
         guard websiteTextField.text != nil else {
-            OTMClient.sharedInstance().showAlertMessage(title: "Location Not Found", message: "Must Enter a Website", viewController: self, shouldPop: false)
+            OTMClient.sharedInstance.showAlertMessage(title: "Location Not Found", message: "Must Enter a Website", viewController: self, shouldPop: false)
             return
         }
         guard websiteTextField.text!.lowercased().hasPrefix("https://") || websiteTextField.text!.lowercased().hasPrefix("http://") else {
-            OTMClient.sharedInstance().showAlertMessage(title: "Location Not Found", message: "Invalid Link. Include HTTP(S)://", viewController: self, shouldPop: false)
+            OTMClient.sharedInstance.showAlertMessage(title: "Location Not Found", message: "Invalid Link. Include HTTP(S)://", viewController: self, shouldPop: false)
             return
         }
         let viewController = storyboard!.instantiateViewController(withIdentifier: "SubmitPinViewController") as! SubmitPinViewController
@@ -49,5 +49,6 @@ class NewPinViewController: UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-
+    
+    
 }

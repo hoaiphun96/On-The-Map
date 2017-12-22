@@ -8,8 +8,8 @@
 import UIKit
 import Foundation
 class OTMClient : NSObject {
-    
-    // MARK: Properties
+    // Shared Instance Singleton
+    static let sharedInstance = OTMClient()
     
     // shared session
     var session = URLSession.shared
@@ -17,12 +17,8 @@ class OTMClient : NSObject {
     var sessionID : String?
     var username: String?
     var password: String?
-    //var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
-    //Student Locations and this Student Location Model
-    var studentInformationModel = [StudentInformation]()
     var myAccount = StudentInformation()
-
+    
     func authenticateWithViewController(_ viewController: UIViewController,_ parameters: [String:AnyObject], completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void) -> URLSessionDataTask {
         print("starting authenticating")
         var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
@@ -38,12 +34,12 @@ class OTMClient : NSObject {
                 completionHandlerForAuth(false, error?.localizedDescription)
                 return
             }
-
+            
             let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             let parsedResult: [String:AnyObject]!
             do {
-            parsedResult = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as! [String:AnyObject]
+                parsedResult = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as! [String:AnyObject]
             } catch {
                 completionHandlerForAuth(false, "Could not parse the data as JSON: '\(newData.debugDescription)'")
                 return
@@ -76,7 +72,7 @@ class OTMClient : NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpBody = "{\"uniqueKey\": \"\(self.myAccount.uniqueKey!)\", \"firstName\": \"\(self.myAccount.firstName!)\", \"lastName\": \"\(self.myAccount.lastName!)\",\"mapString\": \"\(parameters[OTMClient.JSONResponseKeys.MapString]!)\", \"mediaURL\": \"\(parameters[OTMClient.JSONResponseKeys.MediaURL]!)\",\"latitude\": \(parameters[OTMClient.JSONResponseKeys.Latitute]!), \"longitude\": \(parameters[OTMClient.JSONResponseKeys.Longitude]!)}".data(using: .utf8)
-
+        
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil {
@@ -96,7 +92,7 @@ class OTMClient : NSObject {
             self.myAccount.mediaURL = parameters["mediaURL"] as? String
             
             completionHandlerForPin(true, nil)
-           
+            
         }
         task.resume()
         return task
@@ -104,9 +100,10 @@ class OTMClient : NSObject {
     
     // MARK: GET USER INFO
     func getStudentLocations(completionHandlerForGetStudentLocations: @escaping (_ locations: [StudentInformation]?, _ errorString: String?) -> Void) -> URLSessionDataTask {
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?order=-updatedAt&order=-updatedAt")!)
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?order=-updatedAt&limit=100")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil {
@@ -121,12 +118,11 @@ class OTMClient : NSObject {
                 completionHandlerForGetStudentLocations(nil, "Could not parse the data as JSON: '\(data.debugDescription)'")
                 return
             }
-
+            
             if let results = parsedResult?["results"] as? [[String:AnyObject]] {
                 let studentInformations = StudentInformation.studentInformationsFromResults(results)
                 completionHandlerForGetStudentLocations(studentInformations, nil)
             } else {
-                //TODO: CHECK THIS CASE
                 completionHandlerForGetStudentLocations(nil,"Cannot parse GetStudentLocations")
                 return
             }
@@ -176,7 +172,7 @@ class OTMClient : NSObject {
         
         request.httpBody = "{\"uniqueKey\": \"\(self.myAccount.uniqueKey!)\", \"firstName\": \"\(self.myAccount.firstName!)\", \"lastName\": \"\(self.myAccount.lastName!)\",\"mapString\": \"\(self.myAccount.mapString!)\", \"mediaURL\": \"\(parameters["mediaURL"]!)\",\"latitude\": \(parameters["latitude"]!), \"longitude\": \(parameters["longitude"]!)}".data(using: .utf8)
         print("{\"uniqueKey\": \"\(self.myAccount.uniqueKey!)\", \"firstName\": \"\(self.myAccount.firstName!)\", \"lastName\": \"\(self.myAccount.lastName!)\",\"mapString\": \"\(self.myAccount.mapString!)\", \"mediaURL\": \"\(parameters["mediaURL"]!)\",\"latitude\": \(parameters["latitude"]!), \"longitude\": \(parameters["longitude"]!)}")
-    
+        
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
@@ -184,7 +180,6 @@ class OTMClient : NSObject {
                 completionHandlerForPutStudentLocation(false, error?.localizedDescription)
                 return
             }
-            // TODO: UPDATE updatedAt
             let parsedResult: [String:AnyObject]!
             do {
                 parsedResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:AnyObject]
@@ -207,7 +202,7 @@ class OTMClient : NSObject {
         let txtAppend = String(self.myAccount.uniqueKey!).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let urlString = "https://parse.udacity.com/parse/classes/StudentLocation?where={\"uniqueKey\":\"\(txtAppend!)\"}"
         let url = NSURL(string: (urlString as NSString).addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)
-      
+        
         var request = URLRequest(url: url! as URL)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
@@ -277,14 +272,4 @@ class OTMClient : NSObject {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-   
-
-    
-    // MARK: Shared Instance
-    class func sharedInstance() -> OTMClient {
-        struct Singleton {
-            static var sharedInstance = OTMClient()
-        }
-        return Singleton.sharedInstance
-    }
 }

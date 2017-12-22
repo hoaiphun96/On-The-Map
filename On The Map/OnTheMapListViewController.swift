@@ -11,11 +11,13 @@ import UIKit
 class OnTheMapListViewController: UIViewController , UITableViewDataSource{
     
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var studentLocationsTableView: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.loadData()
+        
     }
     
     @IBAction func logOutClicked(_ sender: Any) {
@@ -23,18 +25,18 @@ class OnTheMapListViewController: UIViewController , UITableViewDataSource{
     }
     
     func loadData() {
-        LoaderController.sharedInstance.showLoader()
+        LoaderController.sharedInstance.showLoader(tableView)
         self.navigationController?.navigationBar.isHidden = true
-        let _ = OTMClient.sharedInstance().getStudentLocations { (locations, error) in
+        let _ = OTMClient.sharedInstance.getStudentLocations { (locations, error) in
             if let locations = locations {
-                OTMClient.sharedInstance().studentInformationModel = locations
+                Students.sharedInstance = locations
                 performUIUpdatesOnMain {
                     self.studentLocationsTableView.reloadData()
                     LoaderController.sharedInstance.removeLoader()
                 }
             } else {
                 LoaderController.sharedInstance.removeLoader()
-                OTMClient.sharedInstance().showAlertMessage(title: "", message: "Failed to download student locations", viewController: self, shouldPop: false)
+                OTMClient.sharedInstance.showAlertMessage(title: "", message: "No student found", viewController: self, shouldPop: false)
             }
         }
     }
@@ -45,11 +47,10 @@ class OnTheMapListViewController: UIViewController , UITableViewDataSource{
     
     @IBAction func pinLocationClicked(_ sender: Any) {
         // TODO: check if a pin already existed
-        let _ = OTMClient.sharedInstance().getAStudentLocation { (success, errorString) in
+        let _ = OTMClient.sharedInstance.getAStudentLocation { (success, errorString) in
             if success {
                 if errorString == nil {
-                    // TODO: SHOW ALERT AND ASK IF YOU WANT TO UPDATE (OVERWRITE, CANCEL), IF OVERWRITE CALL POST NEW PIN FUNCTION ELSE DISMISS ALERT
-                    let alert = UIAlertController(title: "", message: "You Have Already Posted A Student Location. Would You Like To OverWrite Your Current Position?", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "", message: "You have already posted a student location. Would you like to overWrite your current position?", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("Overwrite", comment: "Default action"), style: .`default`, handler: { _ in
                         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "NewPinViewController")
                         self.navigationController?.pushViewController(viewController, animated: true)
@@ -69,13 +70,14 @@ class OnTheMapListViewController: UIViewController , UITableViewDataSource{
             }
             else {
                 // IF NOT SUCCESS
+                OTMClient.sharedInstance.showAlertMessage(title: "", message: errorString!, viewController: self, shouldPop: false)
                 print(errorString!)
                 return
             }
         }
-
+        
     }
- 
+    
 }
 
 extension OnTheMapListViewController: UITableViewDelegate {
@@ -84,30 +86,29 @@ extension OnTheMapListViewController: UITableViewDelegate {
         
         /* Get cell type */
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for: indexPath) as! NameViewCell
-        let studentInformation = OTMClient.sharedInstance().studentInformationModel[(indexPath as NSIndexPath).row]
-        
+        let studentInformation = Students.sharedInstance[(indexPath as NSIndexPath).row]
         /* Set cell defaults */
         cell.nameLabel.text = (studentInformation.firstName ?? "No") + " " + (studentInformation.lastName ?? "Name")!
         return cell
     }
-        
+    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return OTMClient.sharedInstance().studentInformationModel.count
+        return Students.sharedInstance.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let app = UIApplication.shared
-        let toOpen = OTMClient.sharedInstance().studentInformationModel[(indexPath as NSIndexPath).row].mediaURL
+        let toOpen = Students.sharedInstance[(indexPath as NSIndexPath).row].mediaURL
         app.open(URL(string: toOpen!)!, options: [:], completionHandler: { (success) in
-                if success == false {
-                    return
-                }
-            })
+            if success == false {
+                return
+            }
+        })
         
     }
-   
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     } 

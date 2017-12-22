@@ -12,9 +12,7 @@ class LoaderController: NSObject {
     
     static let sharedInstance = LoaderController()
     private let activityIndicator = UIActivityIndicatorView()
-    private var holdingView = UIView()
     private let blurView = UIView()
-    //MARK: - Private Methods -
     private func setupLoader() {
         removeLoader()
         
@@ -23,22 +21,17 @@ class LoaderController: NSObject {
     }
     
     //MARK: - Public Methods -
-    func showLoader() {
+    func showLoader(_ holdingView: UIView) {
         setupLoader()
         
-        let appDel = UIApplication.shared.delegate as! AppDelegate
-        holdingView = appDel.window!.rootViewController!.view!
-      
         DispatchQueue.main.async {
-            self.blurView.frame = self.holdingView.frame
-            self.blurView.center = self.holdingView.center
+            self.blurView.frame = holdingView.bounds
             self.blurView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             
-            self.activityIndicator.center = self.holdingView.center
+            self.activityIndicator.center = holdingView.center
             self.activityIndicator.startAnimating()
             self.blurView.addSubview(self.activityIndicator)
-            self.holdingView.addSubview(self.blurView)
-            UIApplication.shared.beginIgnoringInteractionEvents()
+            holdingView.addSubview(self.blurView)
         }
     }
     
@@ -47,7 +40,6 @@ class LoaderController: NSObject {
             self.blurView.removeFromSuperview()
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
-            UIApplication.shared.endIgnoringInteractionEvents()
         }
     }
 }

@@ -45,15 +45,21 @@
                                     <constraint firstAttribute="height" constant="40" id="hGf-Do-OFE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="ctc-yl-w9R"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zgc-Z2-kPv" userLabel="Password Text Field">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zgc-Z2-kPv" userLabel="Password Text Field">
                                 <rect key="frame" x="48" y="427.66666666666669" width="318" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="e9G-Cw-eyP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="JKA-5d-8iQ"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kg-vr-OzW" userLabel="Login Button">
                                 <rect key="frame" x="48" y="474" width="318" height="40"/>
@@ -153,7 +159,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="NameCell" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5vI-wQ-SF2">
-                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                                <rect key="frame" x="0.0" y="60" width="414" height="627"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" id="tft-4k-xTp" customClass="NameViewCell" customModule="On_The_Map" customModuleProvider="target">
@@ -196,7 +202,7 @@
                             <constraint firstItem="VDM-fr-IaW" firstAttribute="leading" secondItem="SDm-Ea-ggf" secondAttribute="leading" id="3Sp-8N-Egs"/>
                             <constraint firstItem="F2M-l3-0MM" firstAttribute="trailing" secondItem="VDM-fr-IaW" secondAttribute="trailing" id="HFe-iF-coQ"/>
                             <constraint firstItem="5vI-wQ-SF2" firstAttribute="bottom" secondItem="F2M-l3-0MM" secondAttribute="bottom" id="O5y-Jo-Pls"/>
-                            <constraint firstItem="5vI-wQ-SF2" firstAttribute="top" secondItem="VDM-fr-IaW" secondAttribute="bottom" id="S3M-mC-YSf"/>
+                            <constraint firstItem="5vI-wQ-SF2" firstAttribute="top" secondItem="VDM-fr-IaW" secondAttribute="bottom" constant="-4" id="S3M-mC-YSf"/>
                             <constraint firstItem="VDM-fr-IaW" firstAttribute="top" secondItem="SDm-Ea-ggf" secondAttribute="top" constant="15" id="Z2V-Sb-uFN"/>
                             <constraint firstItem="5vI-wQ-SF2" firstAttribute="trailing" secondItem="F2M-l3-0MM" secondAttribute="trailing" id="vVH-74-m5I"/>
                             <constraint firstItem="5vI-wQ-SF2" firstAttribute="leading" secondItem="F2M-l3-0MM" secondAttribute="leading" id="xlE-AQ-3CS"/>
@@ -206,11 +212,12 @@
                     <tabBarItem key="tabBarItem" title="List" image="icon_listview-selected" selectedImage="icon_listview-selected" id="iop-BD-1BR"/>
                     <connections>
                         <outlet property="studentLocationsTableView" destination="5vI-wQ-SF2" id="atN-M1-600"/>
+                        <outlet property="tableView" destination="5vI-wQ-SF2" id="P6w-Sz-d89"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0N-YE-Fzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1648" y="644"/>
+            <point key="canvasLocation" x="1647.826086956522" y="643.20652173913049"/>
         </scene>
         <!--Add Location View Controller-->
         <scene sceneID="S9F-gE-dmT">
