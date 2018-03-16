@@ -1,4 +1,4 @@
-# On-The-Map
+# On The Map
 An iOS app that displays annotated pins and students information on a map and on a table view using Udacity and Parse RESTful APIs, Core Location and the MapKit frameworks. User can add their own data by posting a string that can be reverse geocoded to a location, and a URL
 
 ## App Specifications
